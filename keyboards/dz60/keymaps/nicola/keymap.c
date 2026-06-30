@@ -11,18 +11,11 @@ enum layer_names {
 };
 
 enum custom_keycodes {
-<<<<<<< HEAD
     KC_KANA  = SAFE_RANGE, 
     KC_EISU,                 
     KC_WIN_SHFT_RIGHT,      
     KC_TEAM_MUTE,           
     TG_JP                 
-=======
-    KC_WIN_SHFT_RIGHT = NG_SAFE_RANGE,     
-    KC_TEAM_MUTE,  
-    TG_JP,
-    KC_MDN_PRV               
->>>>>>> e7956d5ffe (fixed key settings)
 };
 
 bool us_emu_enabled = false;
