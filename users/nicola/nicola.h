@@ -31,6 +31,8 @@ bool nicola_state(void);
 
 bool process_nicola(uint16_t, keyrecord_t *);
 void set_nicola(uint8_t);
+void nicola_on_user(void);
+void nicola_off_user(void);
 
 extern int key_process_guard; // Declare key_process_guard as external
 
@@ -42,6 +44,11 @@ typedef enum nicola_keycodes {
   NG_3,
   NG_4,
   NG_5,
+  NG_6,
+  NG_7,
+  NG_8,
+  NG_9,
+  NG_0,
 
   NG_Q,
   NG_W,

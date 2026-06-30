@@ -27,7 +27,7 @@ static bool is_nicola = false; // 親指シフトがオンかオフか
 static uint8_t nicola_layer = 0; // レイヤー番号
 static uint8_t n_modifier = 0; // 押しているmodifierキーの数
 
-#define TIMEOUT_THRESHOLD (150)
+#define TIMEOUT_THRESHOLD TAPPING_TERM
 #define OVERLAP_THRESHOLD (20)
 
 typedef enum {
@@ -64,23 +64,27 @@ void set_nicola(uint8_t layer) {
 #endif
 }
 
+__attribute__((weak)) void nicola_on_user(void) {
+  tap_code(KC_LNG2);
+}
+
+__attribute__((weak)) void nicola_off_user(void) {
+  tap_code(KC_LNG1);
+}
+
 // 親指シフトをオンオフ
 void nicola_on(void) {
   is_nicola = true;
   nicola_clear();
   layer_on(nicola_layer);
-
-  tap_code(KC_LNG2); // IME ON
-  // tap_code(KC_INT_PREV); // Win
+  nicola_on_user();
 }
 
 void nicola_off(void) {
   is_nicola = false;
   nicola_clear();
   layer_off(nicola_layer);
-
-  tap_code(KC_LNG1); // IME OFF
-  // tap_code(KC_INT_NEXT); // Win
+  nicola_off_user();
 }
 
 // 親指シフトの状態
@@ -129,6 +133,11 @@ void nicola_m_type(void) {
         case NG_3   : send_string("3" ); break;
         case NG_4   : send_string("4" ); break;
         case NG_5   : send_string("5" ); break;
+        case NG_6   : send_string("6" ); break;
+        case NG_7   : send_string("7" ); break;
+        case NG_8   : send_string("8" ); break;
+        case NG_9   : send_string("9" ); break;
+        case NG_0   : send_string("0" ); break;
 
         case NG_Q   : send_string("." ); break;
         case NG_W   : send_string("ka"); break;
@@ -169,8 +178,10 @@ void nicola_m_type(void) {
 }
 
 void nicola_o_type(void) {
-    if(nicola_o_key != 0) {
-        send_string(" ");
+    if (nicola_o_key == NG_SHFTL) {
+        nicola_off();
+    } else if (nicola_o_key == NG_SHFTR) {
+        tap_code(KC_SPC);
     }
 }
 
@@ -182,6 +193,11 @@ void nicola_om_type(void) {
             case NG_3   : send_string("~" ); break;
             case NG_4   : send_string("[" ); break;
             case NG_5   : send_string("]" ); break;
+            case NG_6   : send_string("[" ); break;
+            case NG_7   : send_string("]" ); break;
+            case NG_8   : send_string("(" ); break;
+            case NG_9   : send_string(")" ); break;
+            case NG_0   : send_string("[" ); break;
 
             case NG_Q   : send_string("la"); break;
             case NG_W   : send_string("e" ); break;
@@ -226,6 +242,11 @@ void nicola_om_type(void) {
             case NG_3   : send_string("~" ); break;
             case NG_4   : send_string("[" ); break;
             case NG_5   : send_string("]" ); break;
+            case NG_6   : send_string("[" ); break;
+            case NG_7   : send_string("]" ); break;
+            case NG_8   : send_string("(" ); break;
+            case NG_9   : send_string(")" ); break;
+            case NG_0   : send_string("[" ); break;
 
             case NG_Q   :                    break;
             case NG_W   : send_string("ga"); break;
@@ -488,3 +509,5 @@ void keypress_timer_expired(void) {
         nicola_int_state = NICOLA_STATE_S1_INIT;
     }
 }
+
+
