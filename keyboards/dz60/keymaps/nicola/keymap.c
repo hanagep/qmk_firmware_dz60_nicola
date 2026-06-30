@@ -11,11 +11,11 @@ enum layer_names {
 };
 
 enum custom_keycodes {
-    KC_KANA = SAFE_RANGE, 
+    KC_KANA, 
     KC_EISU,                 
     KC_WIN_SHFT_RIGHT,      
     KC_TEAM_MUTE,           
-    TG_JP                   
+    TG_JP  = SAFE_RANGE                 
 };
 
 bool us_emu_enabled = false;
