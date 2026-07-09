@@ -179,7 +179,7 @@ void nicola_m_type(void) {
 
 void nicola_o_type(void) {
     if (nicola_o_key == NG_SHFTL) {
-        nicola_off();
+        tap_code(KC_SPC);
     } else if (nicola_o_key == NG_SHFTR) {
         tap_code(KC_SPC);
     }
